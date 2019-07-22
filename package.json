@@ -1,0 +1,35 @@
+{
+  "name": "crepes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "npm run build && next export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tVeratti/crepes.git"
+  },
+  "author": "Tatiana Veratti <tatiana.veratti@topbox.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tVeratti/crepes/issues"
+  },
+  "homepage": "https://github.com/tVeratti/crepes#readme",
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "frontmatter-markdown-loader": "^1.7.0",
+    "next": "^9.0.2",
+    "node-sass": "^4.12.0",
+    "postcss": "^7.0.17",
+    "raw-loader": "^2.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "sass-loader": "^7.1.0"
+  }
+}
