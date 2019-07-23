@@ -30,6 +30,8 @@
     "raw-loader": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "sass-loader": "^7.1.0"
+    "react-zdog": "^1.0.10",
+    "sass-loader": "^7.1.0",
+    "zdog": "^1.1.0"
   }
 }
