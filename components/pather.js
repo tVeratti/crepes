@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 
 export default class Pather extends PureComponent {
   static defaultProps = {
-    speed: 1.1
+    speed: 0.05
   };
 
   state = {
@@ -32,8 +32,8 @@ export default class Pather extends PureComponent {
     const { target_position: prev_position } = this.state;
     const { target_position: next_position } = this.getPosition(nextIndex);
 
-    const x_speed = next_position[0] - prev_position[0] > 0 ? 1 : -1;
-    const y_speed = next_position[1] - prev_position[1] > 0 ? 1 : -1;
+    const x_speed = next_position[0] - prev_position[0];
+    const y_speed = next_position[1] - prev_position[1];
 
     // Move the target position forward by the speed.
     const target_position = [
@@ -45,7 +45,7 @@ export default class Pather extends PureComponent {
       Math.abs(target_position[0] - next_position[0]) +
       Math.abs(target_position[1] - next_position[1]);
 
-    if (distance <= 1) index = nextIndex;
+    if (distance <= 20) index = nextIndex;
 
     this.setState({
       index,

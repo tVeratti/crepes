@@ -16,6 +16,7 @@ export default class Stick extends PureComponent {
   render() {
     const { position } = this.props;
     const rotation = (position[0] + position[1]) / 100;
+    console.log(position[0]);
 
     return (
       <div className="stick">
@@ -27,7 +28,7 @@ export default class Stick extends PureComponent {
             color="#e6d09a"
             fill={true}
             translate={{ x: position[0], y: position[1] }}
-            rotate={{ x: -0.8, y: rotation, z: position[0] / 100 }}
+            rotate={{ x: -0.8, y: position[0] / 100, z: position[1] / 100 }}
             cornerRadius={RADIUS}
             stroke={STROKE}>
             {/* Head */}
