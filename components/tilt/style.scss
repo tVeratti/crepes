@@ -1,0 +1,31 @@
+.tilt {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    perspective: 100rem;
+    perspective-origin: center;
+  
+    &--inactive {
+      .tilt__face {
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+  
+    &+ .tilt {
+      margin-left: 2rem;
+    }
+  }
+  
+  .tilt__face {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    backface-visibility: hidden;
+  }
+  
+  .tilt__content {
+    display: inline-block;
+  }

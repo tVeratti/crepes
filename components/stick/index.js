@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { Illustration, RoundedRect } from 'react-zdog';
 
-import './stick.scss';
+import './style.scss';
 
 const STROKE = 15;
 const RADIUS = 30;
@@ -13,32 +13,24 @@ export default class Stick extends PureComponent {
 
   state = { rotation: 0, yRotation: 0 };
 
-  componentDidMount() {
-    this.rotateZ();
-  }
-
-  rotateZ = () => {
-    const { rotation } = this.state;
-    this.setState({ rotation: rotation + 0.01 });
-    requestAnimationFrame(this.rotateZ);
-  };
-
   render() {
-    const { rotation } = this.state;
-    const oscillation = Math.sin(rotation);
+    const { position } = this.props;
+    const rotation = (position[0] + position[1]) / 100;
 
     return (
       <div className="stick">
         <Illustration>
+          {/* Handle */}
           <RoundedRect
             width={this.width}
             height={this.size}
             color="#e6d09a"
             fill={true}
-            rotate={{ x: -0.8, y: rotation, z: oscillation / 2 }}
+            translate={{ x: position[0], y: position[1] }}
+            rotate={{ x: -0.8, y: rotation, z: position[0] / 100 }}
             cornerRadius={RADIUS}
-            stroke={STROKE}
-          >
+            stroke={STROKE}>
+            {/* Head */}
             <RoundedRect
               width={this.size - 5}
               height={this.height}
