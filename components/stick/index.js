@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { Illustration, RoundedRect } from 'react-zdog';
+import { Illustration, RoundedRect, Anchor } from 'react-zdog';
 
 import './style.scss';
 
@@ -11,37 +11,52 @@ export default class Stick extends PureComponent {
   width = 150;
   height = 200;
 
-  state = { rotation: 0, yRotation: 0 };
+  state = { mouse_position: {} };
+
+  componentDidMount() {
+    //document.addEventListener('mousemove', this.moveHandle);
+  }
+
+  componentWillUnmount() {
+    //document.removeEventListener('mousemove', this.moveHandle);
+  }
+
+  moveHandle = e => {
+    const { pageX: x, pageY: y } = e;
+    this.setState({ mouse_position: { x, y } });
+  };
 
   render() {
-    const { position } = this.props;
-    const rotation = (position[0] + position[1]) / 100;
-    console.log(position[0]);
+    const { position, degrees, crepe_size } = this.props;
+    const [x, y] = position;
 
     return (
-      <div className="stick">
+      <div
+        className="stick"
+        style={{ width: this.height * 2, height: this.height * 2 }}>
         <Illustration>
-          {/* Handle */}
-          <RoundedRect
-            width={this.width}
-            height={this.size}
-            color="#e6d09a"
-            fill={true}
-            translate={{ x: position[0], y: position[1] }}
-            rotate={{ x: -0.8, y: position[0] / 100, z: position[1] / 100 }}
-            cornerRadius={RADIUS}
-            stroke={STROKE}>
-            {/* Head */}
+          <Anchor rotate={{ z: -degrees }}>
+            {/* Handle */}
             <RoundedRect
-              width={this.size - 5}
-              height={this.height}
-              color="#edd69f"
+              width={this.width}
+              height={this.size}
+              color="#e6d09a"
               fill={true}
+              rotate={{ x: Math.sin(degrees) + 200 }}
               cornerRadius={RADIUS}
-              stroke={STROKE}
-              translate={{ y: this.height / -2 - 10 }}
-            />
-          </RoundedRect>
+              stroke={STROKE}>
+              {/* Head */}
+              <RoundedRect
+                width={this.size - 5}
+                height={this.height}
+                color="#edd69f"
+                fill={true}
+                cornerRadius={RADIUS}
+                stroke={STROKE}
+                translate={{ y: this.height / -2 - 10 }}
+              />
+            </RoundedRect>
+          </Anchor>
         </Illustration>
       </div>
     );

@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 
 export default class Pather extends PureComponent {
   static defaultProps = {
-    speed: 0.05
+    speed: 0.8
   };
 
   state = {
@@ -12,7 +12,7 @@ export default class Pather extends PureComponent {
 
   points = [[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]];
 
-  offset = 100;
+  offset = 150;
 
   componentDidMount() {
     this.frame_id = this.move();
@@ -32,8 +32,8 @@ export default class Pather extends PureComponent {
     const { target_position: prev_position } = this.state;
     const { target_position: next_position } = this.getPosition(nextIndex);
 
-    const x_speed = next_position[0] - prev_position[0];
-    const y_speed = next_position[1] - prev_position[1];
+    const x_speed = next_position[0] - prev_position[0] > 0 ? 1 : -1;
+    const y_speed = next_position[1] - prev_position[1] > 0 ? 1 : -1;
 
     // Move the target position forward by the speed.
     const target_position = [
@@ -45,7 +45,7 @@ export default class Pather extends PureComponent {
       Math.abs(target_position[0] - next_position[0]) +
       Math.abs(target_position[1] - next_position[1]);
 
-    if (distance <= 20) index = nextIndex;
+    if (distance <= 50) index = nextIndex;
 
     this.setState({
       index,
@@ -68,6 +68,13 @@ export default class Pather extends PureComponent {
   render() {
     const { render } = this.props;
     const { target_position, index } = this.state;
-    return render(target_position, index);
+    const progress = [
+      target_position[0] / this.offset,
+      target_position[1] / this.offset
+    ];
+
+    // Get the degrees of rotation based on the positional quadrant.
+    const degrees = Math.atan2(progress[1], progress[0]) + 180 / Math.PI;
+    return render(target_position, degrees, progress);
   }
 }

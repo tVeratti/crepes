@@ -115,7 +115,6 @@ export default class TiltPanel extends Component {
     transform.rotateX = y;
     transform.rotateY = x;
     this.setState({ transform });
-    console.log(transform);
   }, 10);
 
   // =============================
