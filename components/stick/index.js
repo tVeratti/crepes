@@ -27,29 +27,34 @@ export default class Stick extends PureComponent {
   };
 
   render() {
-    const { position, degrees, crepe_size } = this.props;
+    const { position, degrees, size } = this.props;
     const [x, y] = position;
 
+    const color = 'white';
     return (
       <div
         className="stick"
-        style={{ width: this.height * 2, height: this.height * 2 }}>
-        <Illustration>
-          <Anchor rotate={{ z: -degrees }}>
-            {/* Handle */}
+        style={{
+          width: this.height * 3,
+          height: this.height * 3
+        }}>
+        <Illustration zoom={0.7}>
+          <Anchor rotate={{ z: -(degrees + 0.15) }}>
+            {/* Head */}
             <RoundedRect
               width={this.width}
               height={this.size}
-              color="#e6d09a"
+              color={color}
               fill={true}
+              translate={{ x: -130 }}
               rotate={{ x: Math.sin(degrees) + 200 }}
               cornerRadius={RADIUS}
               stroke={STROKE}>
-              {/* Head */}
+              {/* Handle */}
               <RoundedRect
                 width={this.size - 5}
                 height={this.height}
-                color="#edd69f"
+                color={color}
                 fill={true}
                 cornerRadius={RADIUS}
                 stroke={STROKE}

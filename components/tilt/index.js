@@ -35,7 +35,8 @@ export default class TiltPanel extends Component {
   static defaultProps = {
     speed: 0.08,
     limit: 45,
-    pause: false
+    pause: false,
+    z: 10
   };
 
   state = {
@@ -119,7 +120,7 @@ export default class TiltPanel extends Component {
 
   // =============================
   render() {
-    const { children, pause } = this.props;
+    const { children, pause, z } = this.props;
     const { transform } = this.state;
     let { rotateX, rotateY } = transform;
 
@@ -136,7 +137,7 @@ export default class TiltPanel extends Component {
     const panelStyle = this.getPanelSize();
 
     const faceStyle = {
-      transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`
+      transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${z}px)`
     };
 
     return (

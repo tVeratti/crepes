@@ -1,11 +1,17 @@
 import { PureComponent } from 'react';
 
+const TYPE_AUTO = 'AUTO';
+const TYPE_SCROLL = 'SCROLL';
+
 export default class Pather extends PureComponent {
   static defaultProps = {
-    speed: 0.8
+    steps: 1,
+    speed: 0.8,
+    type: TYPE_AUTO
   };
 
   state = {
+    step: 0,
     index: 0,
     target_position: [0, 0]
   };
@@ -15,19 +21,36 @@ export default class Pather extends PureComponent {
   offset = 150;
 
   componentDidMount() {
-    this.frame_id = this.move();
+    switch (this.props.type) {
+      case TYPE_AUTO:
+        this.frame_id = this.move();
+        break;
+      case TYPE_SCROLL:
+        document.addEventListener('scroll', this.move);
+        break;
+    }
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.frame_id);
+    switch (this.props.type) {
+      case TYPE_AUTO:
+        cancelAnimationFrame(this.frame_id);
+        break;
+      case TYPE_SCROLL:
+        document.removeEventListener('scroll', this.move);
+        break;
+    }
   }
 
   move = () => {
     const { speed } = this.props;
 
-    let { index } = this.state;
+    let { index, step } = this.state;
     let nextIndex = index + 1;
-    if (nextIndex > this.points.length - 1) nextIndex = 0;
+    if (nextIndex > this.points.length - 1) {
+      nextIndex = 0;
+      step += 1;
+    }
 
     const { target_position: prev_position } = this.state;
     const { target_position: next_position } = this.getPosition(nextIndex);
@@ -48,6 +71,7 @@ export default class Pather extends PureComponent {
     if (distance <= 50) index = nextIndex;
 
     this.setState({
+      step,
       index,
       target_position
     });
@@ -67,14 +91,11 @@ export default class Pather extends PureComponent {
 
   render() {
     const { render } = this.props;
-    const { target_position, index } = this.state;
-    const progress = [
-      target_position[0] / this.offset,
-      target_position[1] / this.offset
-    ];
+    const { target_position: position, index, step } = this.state;
+    const progress = [position[0] / this.offset, position[1] / this.offset];
 
     // Get the degrees of rotation based on the positional quadrant.
     const degrees = Math.atan2(progress[1], progress[0]) + 180 / Math.PI;
-    return render(target_position, degrees, progress);
+    return render({ position, degrees, progress, step });
   }
 }

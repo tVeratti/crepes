@@ -1,7 +1,4 @@
-import Stick from '../components/stick';
-import Crepe from '../components/crepe';
-import Tilt from '../components/tilt';
-import Pather from '../components/pather';
+import Parallax from '../components/parallax';
 
 import './index.scss';
 
@@ -10,18 +7,16 @@ const CREPE_SIZE = 200;
 export default () => (
   <div className="view">
     <div className="main">
-      <Pather
-        render={(position, degrees, progress) => (
-          <React.Fragment>
-            <Crepe size={CREPE_SIZE} degrees={degrees} />
-            <Stick
-              position={position}
-              degrees={degrees}
-              crepe_size={CREPE_SIZE}
-            />
-          </React.Fragment>
+      <Parallax
+        speed={0.5}
+        render={top => (
+          <div
+            className="main__banner"
+            style={{ backgroundPosition: `0 ${top}` }}
+          />
         )}
       />
+      Crepes
     </div>
   </div>
 );
