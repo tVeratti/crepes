@@ -13,7 +13,7 @@ collections:
     slug: '{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Note', name: 'note', widget: 'text' }
+      - { label: 'Note', name: 'note', widget: 'text', required: false }
     
   - name: 'menu-section'
     label: 'Menu Section'
@@ -22,17 +22,17 @@ collections:
     slug: '{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Note', name: 'note', widget: 'text' }
+      - { label: 'Note', name: 'note', widget: 'text', required: false }
       - { label: 'Menu', name: 'menu', widget: 'relation', collection: 'menu', valueField: 'title', searchFields: 'title' }
 
   - name: 'menu-item'
     label: 'Menu Item'
-    folder: 'content/menu'
+    folder: 'content/menu/items'
     create: true
     slug: '{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Description', name: 'description', widget: 'text' }
       - { label: 'Price', name: 'price', widget: 'number' }
-      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
       - { label: 'Menu Section', name: 'section', widget: 'relation', collection: 'menu-section', valueField: 'title', searchFields: 'title' }
