@@ -12,7 +12,7 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
-      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Note', name: 'note', widget: 'text' }
     
   - name: 'menu-section'
@@ -21,9 +21,9 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
-      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Note', name: 'note', widget: 'text' }
-      - { label: 'Menu', name: 'menu', widget: 'relation', collection: 'menu', valueField: 'name', searchFields: 'name' }
+      - { label: 'Menu', name: 'menu', widget: 'relation', collection: 'menu', valueField: 'title', searchFields: 'title' }
 
   - name: 'menu-item'
     label: 'Menu Item'
@@ -31,8 +31,8 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
-      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Description', name: 'description', widget: 'text' }
       - { label: 'Price', name: 'price', widget: 'number' }
       - { label: 'Image', name: 'image', widget: 'image' }
-      - { label: 'Menu Section', name: 'section', widget: 'relation', collection: 'menu-section', valueField: 'name', searchFields: 'name' }
+      - { label: 'Menu Section', name: 'section', widget: 'relation', collection: 'menu-section', valueField: 'title', searchFields: 'title' }
