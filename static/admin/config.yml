@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: base
 
-media_folder: public/img
-public_folder: img
+media_folder: static/img
+public_folder: /img
 
 collections:
   - name: 'menu'
@@ -14,7 +14,7 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Note', name: 'note', widget: 'text', required: false }
-    
+
   - name: 'menu-section'
     label: 'Menu Section'
     folder: 'content/menu/sections'
@@ -23,7 +23,14 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Note', name: 'note', widget: 'text', required: false }
-      - { label: 'Menu', name: 'menu', widget: 'relation', collection: 'menu', valueField: 'title', searchFields: 'title' }
+      - {
+          label: 'Menu',
+          name: 'menu',
+          widget: 'relation',
+          collection: 'menu',
+          valueField: 'title',
+          searchFields: 'title',
+        }
 
   - name: 'menu-item'
     label: 'Menu Item'
@@ -35,4 +42,11 @@ collections:
       - { label: 'Description', name: 'description', widget: 'text' }
       - { label: 'Price', name: 'price', widget: 'number' }
       - { label: 'Image', name: 'image', widget: 'image', required: false }
-      - { label: 'Menu Section', name: 'section', widget: 'relation', collection: 'menu-section', valueField: 'title', searchFields: 'title' }
+      - {
+          label: 'Menu Section',
+          name: 'section',
+          widget: 'relation',
+          collection: 'menu-section',
+          valueField: 'title',
+          searchFields: 'title',
+        }
