@@ -1,13 +1,10 @@
-const withSass = require('@zeit/next-sass');
-module.exports = withSass({
-    webpack(config, options) {
-        config.module.rules.push(
-            {
-                test: /\.md$/,
-                use: 'frontmatter-markdown-loader'
-            }
-        )
-        return config;
-    }
-})
-
+module.exports = {
+  webpack: (cfg) => {
+    cfg.module.rules.push({
+      test: /\.md$/,
+      loader: 'frontmatter-markdown-loader',
+      options: { mode: ['react-component'] },
+    });
+    return cfg;
+  },
+};
