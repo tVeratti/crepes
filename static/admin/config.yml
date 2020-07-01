@@ -14,39 +14,35 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Note', name: 'note', widget: 'text', required: false }
-
-  - name: 'menu-section'
-    label: 'Menu Section'
-    folder: 'content/menu/sections'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Note', name: 'note', widget: 'text', required: false }
       - {
-          label: 'Menu',
-          name: 'menu',
-          widget: 'relation',
-          collection: 'menu',
-          valueField: 'title',
-          searchFields: 'title',
-        }
-
-  - name: 'menu-item'
-    label: 'Menu Item'
-    folder: 'content/menu/items'
-    create: true
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Description', name: 'description', widget: 'text' }
-      - { label: 'Price', name: 'price', widget: 'number' }
-      - { label: 'Image', name: 'image', widget: 'image', required: false }
-      - {
-          label: 'Menu Section',
-          name: 'section',
-          widget: 'relation',
-          collection: 'menu-section',
-          valueField: 'title',
-          searchFields: 'title',
+          label: 'Sections',
+          name: 'sections',
+          widget: 'list',
+          required: false,
+          fields:
+            [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Note', name: 'note', widget: 'text', required: false },
+              {
+                label: 'Items',
+                name: 'items',
+                widget: 'list',
+                fields:
+                  [
+                    { label: 'Title', name: 'title', widget: 'string' },
+                    {
+                      label: 'Description',
+                      name: 'description',
+                      widget: 'text',
+                    },
+                    { label: 'Price', name: 'price', widget: 'number' },
+                    {
+                      label: 'Image',
+                      name: 'image',
+                      widget: 'image',
+                      required: false,
+                    },
+                  ],
+              },
+            ],
         }
