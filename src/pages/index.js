@@ -26,26 +26,22 @@ const IndexPage = ({ data }) => {
 };
 
 export const pageQuery = graphql`
-  query MyQuery {
-    allMarkdownRemark {
+  query MenuQuery {
+    allMarkdownRemark(filter: { fileAbsolutePath: { glob: "**/menu/*.md" } }) {
       edges {
         node {
-          id
+          frontmatter {
+            note
+            title
+            sections {
+              note
+              title
+            }
+          }
         }
       }
     }
   }
 `;
-
-// sections {
-//   title
-//   note
-//   items {
-//     title
-//     description
-//     price
-//     image
-//   }
-// }
 
 export default IndexPage;
