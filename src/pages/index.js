@@ -27,27 +27,25 @@ const IndexPage = ({ data }) => {
 
 export const pageQuery = graphql`
   query MyQuery {
-    allMarkdownRemark(filter: { fileAbsolutePath: { glob: "**/menu/*.md" } }) {
+    allMarkdownRemark {
       edges {
         node {
-          frontmatter {
-            title
-            note
-            sections {
-              title
-              note
-              items {
-                title
-                description
-                price
-                image
-              }
-            }
-          }
+          id
         }
       }
     }
   }
 `;
+
+// sections {
+//   title
+//   note
+//   items {
+//     title
+//     description
+//     price
+//     image
+//   }
+// }
 
 export default IndexPage;
