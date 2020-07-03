@@ -20,27 +20,25 @@ collections:
           widget: 'list',
           required: false,
           fields:
-            [
-              { label: 'Title', name: 'title', widget: 'string' },
-              { label: 'Note', name: 'note', widget: 'text', required: false }
-            ]
+            - { label: 'Title', name: 'title', widget: 'string' }
+            - { label: 'Note', name: 'note', widget: 'text', required: false }
         }
         
-    - name: 'items'
-      label: 'Items'
-      folder: 'content/menu/items'
-      create: true
-      slug: '{{slug}}'
-      fields:
-        - { label: 'Title', name: 'title', widget: 'string' }
-        - { label: 'Description', name: 'description', widget: 'text' }
-        - { label: 'Price', name: 'price', widget: 'number' }
-        - { label: 'Image', name: 'image', widget: 'image', required: false }
-        - {
-            label: 'Menu Section',
-            name: 'section',
-            widget: 'relation',
-            collection: 'menu',
-            valueField: 'sections.*.title',
-            searchFields: ['sections.*.title']
-          }
+  - name: 'items'
+    label: 'Items'
+    folder: 'content/menu/items'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Description', name: 'description', widget: 'text' }
+      - { label: 'Price', name: 'price', widget: 'number' }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - {
+          label: 'Menu Section',
+          name: 'section',
+          widget: 'relation',
+          collection: 'menu',
+          valueField: 'sections.*.title',
+          searchFields: ['sections.*.title']
+        }
