@@ -1,47 +1,57 @@
-import React, { useMemo } from 'react';
-import { graphql } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 // import { Link } from 'gatsby';
-
-import DataContext from '../context';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import Menu from '../components/menu';
+import Parallax from '../components/parallax';
+import Card from '../components/card';
 
-const mapFrontmatter = (data) => {
-  return data?.allMarkdownRemark?.edges.map((e) => e.node.frontmatter) || [];
-};
+import Crepe01 from '../images/crepe_01.jpg';
+import { Link } from 'gatsby';
 
-const IndexPage = ({ data }) => {
-  const content = useMemo(() => mapFrontmatter(data), [data]);
+const Hero = styled.div`
+  padding: 188px 40px;
+  height: 600px;
+`;
 
+const Blue = styled.div`
+  padding: 40px;
+  background: ${(props) => props.theme.blue00};
+`;
+
+const CardBody = styled.div`
+  display: flex;
+`;
+
+const IndexPage = () => {
   return (
-    <DataContext.Provider value={content}>
-      <Layout>
-        <SEO title="Home" />
-        <Menu />
-      </Layout>
-    </DataContext.Provider>
+    <Layout>
+      <SEO title="Home" />
+      <Parallax image={Crepe01}>
+        <Hero>
+          <Card>
+            <h2>
+              EAT
+              <br />
+              DRINK
+              <br />
+              RELAX
+            </h2>
+          </Card>
+        </Hero>
+        <Blue>
+          <Card style={{ marginTop: '-60px' }}>
+            <CardBody>
+              <h3>Today's Hours</h3>
+              We're open from 8:30am to 3pm
+              <Link>Full Hours</Link>
+            </CardBody>
+          </Card>
+        </Blue>
+      </Parallax>
+    </Layout>
   );
 };
-
-export const pageQuery = graphql`
-  query MenuQuery {
-    allMarkdownRemark(filter: { fileAbsolutePath: { glob: "**/menu/*.md" } }) {
-      edges {
-        node {
-          frontmatter {
-            note
-            title
-            sections {
-              note
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default IndexPage;
