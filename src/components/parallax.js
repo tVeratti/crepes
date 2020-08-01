@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 export function useParallax(speed = 0.8) {
@@ -8,9 +8,8 @@ export function useParallax(speed = 0.8) {
     const handleScroll = () => {
       const { pageYOffset } = window;
       const offset = -pageYOffset * speed;
-      const top = `${offset}px`;
 
-      setTop(top);
+      setTop(offset);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -32,12 +31,24 @@ const Background = styled.div`
 
 const Parallax = ({ image, children }) => {
   const top = useParallax(0.3);
+  const [offset, setOffset] = useState(0);
+  const ref = useRef();
+
+  useEffect(() => {
+    if (ref.current) {
+      const position = ref.current.getBoundingClientRect().top;
+      const { innerHeight } = window;
+      const beyond = position - innerHeight;
+      setOffset(beyond > 0 ? beyond : 0);
+    }
+  }, [ref.current]);
 
   return (
     <Background
+      ref={ref}
       image={image}
       style={{
-        backgroundPosition: `center ${top}`,
+        backgroundPosition: `center ${top + offset}px`,
       }}
     >
       {children}
