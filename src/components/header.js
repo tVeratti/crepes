@@ -8,21 +8,24 @@ const Container = styled.header`
 
 const Covid = styled.div`
   padding: 8px;
-  background: ${(props) => props.theme.gold};
-  color: ${(props) => props.theme.blue01};
+  background: ${props => props.theme.gold};
+  color: ${props => props.theme.blue01};
   text-align: center;
 `;
 
 const Title = styled.h1`
   position: absolute;
-  top: 100%;
+  top: calc(100% + 15px);
   width: 100%;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 24px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
 
   a,
   a:visited {
-    color: ${(props) => props.theme.blue00};
+    color: ${props => props.theme.blue00};
     text-decoration: none;
   }
 `;
