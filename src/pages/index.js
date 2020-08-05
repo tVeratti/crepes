@@ -5,6 +5,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Parallax from '../components/parallax';
 import Card, { CardBody } from '../components/card';
+import MenuCard from '../components/menuCard';
 
 import Crepe01 from '../images/crepe_01.jpg';
 import Savory01 from '../images/savory_01.png';
@@ -13,10 +14,6 @@ import Sweet01 from '../images/sweet_01.png';
 const Hero = styled.div`
   padding: 188px 40px;
   height: 600px;
-`;
-
-const Menu = styled.div`
-  padding: 102px 0;
 `;
 
 const BigText = styled.h2`
@@ -83,30 +80,20 @@ const IndexPage = () => {
         </Card>
         <BigText white>Something for every taste</BigText>
       </Blue>
-      <Parallax image={Savory01} off>
-        <Menu>
-          <Card>
-            <CardBody
-              title="SAVORY ENTREES"
-              text="Poulet Au Gratin, Seafood Provencal, and more"
-              link="Menu"
-              href="/"
-            />
-          </Card>
-        </Menu>
-      </Parallax>
-      <Parallax image={Sweet01} off>
-        <Menu>
-          <Card>
-            <CardBody
-              title="SWEET DESERTS"
-              text="Heather's Favorite Strawberries, Crepe Suzette, and more"
-              link="Menu"
-              href="/"
-            />
-          </Card>
-        </Menu>
-      </Parallax>
+      <MenuCard
+        image={Savory01}
+        title="SAVORY ENTREES"
+        text="Poulet Au Gratin, Seafood Provencal, and more"
+        link="Menu"
+        href="/"
+      />
+      <MenuCard
+        image={Sweet01}
+        title="SWEET DESERTS"
+        text="Heather's Favorite Strawberries, Crepe Suzette, and more"
+        link="Menu"
+        href="/"
+      />
     </Layout>
   );
 };

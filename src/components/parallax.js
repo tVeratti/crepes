@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import Background from './background';
 
 export function useParallax(speed = 0.8) {
   const [top, setTop] = useState(0);
@@ -22,14 +22,6 @@ export function useParallax(speed = 0.8) {
   return top;
 }
 
-const Background = styled.div`
-  background-image: url(${props => props.image});
-  background-attachment: ${props => (props.fixed ? 'fixed' : 'local')};
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
-`;
-
 const Parallax = ({ image, children, off }) => {
   const top = useParallax(off ? 0.0 : 0.5);
   // const [offset, setOffset] = useState(0);
@@ -47,7 +39,7 @@ const Parallax = ({ image, children, off }) => {
   return (
     <Background
       image={image}
-      fixed={!off}
+      fixed={true}
       style={{
         backgroundPosition: `center ${top}px`,
       }}

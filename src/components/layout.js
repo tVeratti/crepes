@@ -6,9 +6,10 @@ import Header from './header';
 import './reset.css';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../theme';
+import Footer from './footer';
 
 const Main = styled.main`
-  color: ${(props) => props.theme.blue00};
+  color: ${props => props.theme.blue00};
 `;
 
 const Layout = ({ children }) => {
@@ -25,10 +26,8 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div>
-        <Main>{children}</Main>
-        <footer>Footer</footer>
-      </div>
+      <Main>{children}</Main>
+      <Footer siteTitle={data.site.siteMetadata.title} />
     </ThemeProvider>
   );
 };
