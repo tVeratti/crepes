@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   width: 80%;
-  max-width: 1085px;
+  max-width: 304px;
   margin: 0 auto;
   padding: 40px;
   background: white;
   border-bottom: 4px solid ${props => props.theme.gold};
   text-align: center;
+
+  ${props =>
+    props.flex &&
+    css`
+      @media (min-width: 720px) {
+        display: flex;
+        align-items: top;
+        justify-content: space-around;
+        max-width: 1085px;
+      }
+    `}
 `;
 
 const Body = styled.div`
@@ -30,8 +41,10 @@ const Body = styled.div`
   }
 `;
 
-const Card = ({ style, children }) => (
-  <Container style={style}>{children}</Container>
+const Card = ({ style, children, flex }) => (
+  <Container style={style} flex={flex}>
+    {children}
+  </Container>
 );
 
 export const CardBody = ({ title, text, link, href }) => (

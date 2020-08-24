@@ -53,7 +53,7 @@ const IndexPage = () => {
         </Hero>
       </Parallax>
       <Blue>
-        <Card style={{ marginTop: '-60px' }}>
+        <Card style={{ marginTop: '-60px' }} flex>
           {/* Hours */}
           <CardBody
             title="TODAY'S HOURS"
